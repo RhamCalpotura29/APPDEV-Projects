@@ -1,4 +1,5 @@
-function calculateSales() {
+function calculateSales() 
+{
     // Get the projected sales amount from the input field
     let totalSales = document.getElementById("totalSales").value;
     
