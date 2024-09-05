@@ -234,14 +234,29 @@ nav {
     background: transparent;
   }
   .social-icons {
-    display: flex;
+    display: none;
   }
-  .social-icons a {
-    margin: 0 0.5rem;
-    color: var(--clr-primary-5);
-    transition: var(--transition);
-  }
-  .social-icons a:hover {
-    color: var(--clr-primary-7);
+  
+  @media screen and (min-width: 800px) {
+    .nav-center {
+      max-width: 1170px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+  
+    .social-icons {
+      display: flex;
+    }
+    .social-icons a {
+      margin: 0 0.5rem;
+      color: var(--clr-primary-5);
+      transition: var(--transition);
+    }
+    .social-icons a:hover {
+      color: var(--clr-primary-7);
+    }
   }
 }
