@@ -12,8 +12,8 @@ function App() {
                 <Body name="Rham" food="Burger" isHealth={false} age={21}/>
                 <Body name="Ira" food="Samgy" isHealth={false} age={22}/>
                 <Body name="Jp" food="Chicken" isHealth={false} age={21}/>
-                <Body name="Raja" food="Chicken" isHealth={false} age={21}/>
-                <Body name="Ivan" food="Burger" isHealth={false} age={21}/>
+                <Body name="Raja" food="Chicken" isHealth={false} age={22}/>
+                <Body name="Ivan" food="Burger" isHealth={false} age={22}/>
             </div>
             <Footer />
         </>
