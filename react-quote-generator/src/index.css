@@ -1,0 +1,104 @@
+/* src/index.css */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.quote-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  transition: transform 0.2s ease;
+  position: relative;
+}
+
+.quote-container:hover {
+  transform: translateY(-5px); /* Slight lift effect on hover */
+}
+
+.quote-text {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.quote-container:hover .quote-text {
+  color: #007bff; /* Change color on hover */
+}
+
+.random-button {
+  padding: 0.8rem 1.6rem; /* Increased padding for better touch area */
+  background: linear-gradient(135deg, #007bff, #00c6ff);
+  border: none;
+  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.5);
+}
+
+.random-button:hover {
+  background: linear-gradient(135deg, #0056b3, #00a4d3);
+  transform: translateY(-2px); /* Slight lift effect on hover */
+}
+
+.error-message {
+  color: red;
+  margin-top: 1rem;
+  font-weight: bold;
+  transition: opacity 0.3s ease;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between; /* Even spacing between buttons */
+  margin-top: 1.5rem; /* Add some space above the buttons */
+}
+
+
+/* Add some responsiveness */
+@media (max-width: 600px) {
+  .quote-text {
+    font-size: 1.2rem;
+  }
+
+  .random-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+}

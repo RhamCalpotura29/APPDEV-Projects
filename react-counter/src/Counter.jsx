@@ -5,7 +5,7 @@ export default function Counter(){
     //to increment
     const incrementCount = () => {
         //prev state -> new state
-        setCount(count => count + 2)
+        setCount(count => count + 1)
     }
 
     //to decrement
