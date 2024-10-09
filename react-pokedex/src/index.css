@@ -1,0 +1,142 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header styles */
+h1 {
+  font-size: 2.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #2a75bb;
+}
+
+/* Region selector styles */
+.region-selector {
+  margin-bottom: 20px;
+}
+
+.region-selector select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Pokemon grid styles */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Pokemon card styles */
+.pokemon-card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-5px);
+}
+
+.pokemon-card img {
+  width: 120px;
+  height: 120px;
+  display: block;
+  margin: 20px auto;
+}
+
+.pokemon-card h2 {
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  font-size: 1.2rem;
+  text-transform: capitalize;
+}
+
+/* Pokemon details dialog styles */
+.dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dialog-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.dialog-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dialog-header h2 {
+  font-size: 1.8rem;
+  color: #2a75bb;
+}
+
+.dialog-body {
+  display: grid;
+  gap: 10px;
+}
+
+.dialog-body img {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto;
+}
+
+.dialog-body p {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.dialog-body span:first-child {
+  font-weight: bold;
+}
+
+/* Loading indicator styles */
+.loading {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .pokemon-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
