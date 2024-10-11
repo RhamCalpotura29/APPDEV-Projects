@@ -4,7 +4,6 @@ import SearchBar from './SearchBar';
 const Navbar = ({ selectedRegion, setSelectedRegion, searchQuery, setSearchQuery }) => {
   return (
     <nav className="navbar">
-      <h1 className="navbar-title">PokeDex</h1>
       <div className="navbar-controls">
         <div className="navbar-buttons">
           <button

@@ -1,27 +1,41 @@
+// PokemonList.jsx
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PokemonCard from './PokemonCard';
 
-const PokemonList = ({ selectedRegion, searchTerm }) => {
+const PokemonList = ({ selectedRegion, searchTerm, currentPage, itemsPerPage, onPageChange }) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [notFound, setNotFound] = useState(false); // State for Pokémon not found
 
   useEffect(() => {
     const fetchPokemonsByRegion = async () => {
-      const regionUrls = {
-        kanto: 'https://pokeapi.co/api/v2/pokemon?limit=151',
-        johto: 'https://pokeapi.co/api/v2/pokemon?offset=151&limit=100',
-        hoenn: 'https://pokeapi.co/api/v2/pokemon?offset=251&limit=135',
-        sinnoh: 'https://pokeapi.co/api/v2/pokemon?offset=386&limit=107',
-      };
+      let regionUrl;
+
+      switch (selectedRegion) {
+        case 'kanto':
+          regionUrl = 'https://pokeapi.co/api/v2/pokemon?limit=151';
+          break;
+        case 'johto':
+          regionUrl = 'https://pokeapi.co/api/v2/pokemon?offset=151&limit=100';
+          break;
+        case 'hoenn':
+          regionUrl = 'https://pokeapi.co/api/v2/pokemon?offset=251&limit=135';
+          break;
+        case 'sinnoh':
+          regionUrl = 'https://pokeapi.co/api/v2/pokemon?offset=386&limit=107';
+          break;
+        default:
+          return;
+      }
 
       setLoading(true);
       setError(null);
+      setNotFound(false); // Reset notFound state on region change
 
       try {
-        const response = await axios.get(regionUrls[selectedRegion]);
+        const response = await axios.get(regionUrl);
         setPokemonList(response.data.results);
       } catch (error) {
         setError('Error fetching Pokémon data');
@@ -33,17 +47,19 @@ const PokemonList = ({ selectedRegion, searchTerm }) => {
     fetchPokemonsByRegion();
   }, [selectedRegion]);
 
-  const handleSortChange = (event) => {
-    setSortOrder(event.target.value);
-  };
+  // Filter Pokémon based on search term
+  const filteredPokemons = pokemonList.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchTerm)
+  );
 
-  const filteredPokemons = pokemonList
-    .filter((pokemon) => pokemon.name.toLowerCase().includes(searchTerm))
-    .sort((a, b) => {
-      return sortOrder === 'asc'
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name);
-    });
+  // Check if searched Pokémon exists in the current region
+  useEffect(() => {
+    if (searchTerm && filteredPokemons.length === 0) {
+      setNotFound(true);
+    } else {
+      setNotFound(false);
+    }
+  }, [searchTerm, filteredPokemons]);
 
   if (loading) {
     return <div>Loading Pokémon...</div>;
@@ -53,23 +69,32 @@ const PokemonList = ({ selectedRegion, searchTerm }) => {
     return <div>{error}</div>;
   }
 
+  const indexOfLastPokemon = currentPage * itemsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage;
+  const currentPokemons = filteredPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
+
   return (
-    <div className="pokemon-list-container">
-      <div className="sort-container">
-        <label>Sort by: </label>
-        <select value={sortOrder} onChange={handleSortChange}>
-          <option value="asc">A to Z</option>
-          <option value="desc">Z to A</option>
-        </select>
+    <div>
+      {notFound && <div className="error-message">This Pokémon is not found in the {selectedRegion.charAt(0).toUpperCase() + selectedRegion.slice(1)} region.</div>}
+
+      <div className="pokemon-grid">
+        {currentPokemons.map((pokemon) => (
+          <PokemonCard key={pokemon.name} pokemon={pokemon} />
+        ))}
       </div>
-      <div className="pokemon-list">
-        {filteredPokemons.length > 0 ? (
-          filteredPokemons.map((pokemon) => (
-            <PokemonCard key={pokemon.name} pokemon={pokemon} />
-          ))
-        ) : (
-          <div className="error-message">No Pokémon found in this region with the name "{searchTerm}".</div>
-        )}
+
+      {/* Pagination */}
+      <div className="pagination-buttons">
+        {Array.from({ length: totalPages }, (_, index) => (
+          <button
+            key={index}
+            className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
+            onClick={() => onPageChange(index + 1)}  // Call the page change handler
+          >
+            {index + 1}
+          </button>
+        ))}
       </div>
     </div>
   );
