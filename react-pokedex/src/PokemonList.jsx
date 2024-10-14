@@ -3,7 +3,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import PokemonCard from './PokemonCard';
 
-const PokemonList = ({ selectedRegion, searchTerm, currentPage, itemsPerPage, onPageChange }) => {
+const PokemonList = ({
+  selectedRegion,
+  searchTerm,
+  currentPage,
+  itemsPerPage,
+  sortOrder, // Accept sortOrder prop
+  onPageChange,
+}) => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -52,14 +59,27 @@ const PokemonList = ({ selectedRegion, searchTerm, currentPage, itemsPerPage, on
     pokemon.name.toLowerCase().includes(searchTerm)
   );
 
+  // Sort Pokémon based on sortOrder
+  const sortedPokemons = [...filteredPokemons].sort((a, b) => {
+    if (sortOrder === 'name') {
+      return a.name.localeCompare(b.name);
+    } else if (sortOrder === 'id') {
+      // Extract ID from the URL for comparison
+      const idA = parseInt(a.url.split('/')[6], 10);
+      const idB = parseInt(b.url.split('/')[6], 10);
+      return idA - idB;
+    }
+    return 0; // Default to no sorting if invalid sortOrder
+  });
+
   // Check if searched Pokémon exists in the current region
   useEffect(() => {
-    if (searchTerm && filteredPokemons.length === 0) {
+    if (searchTerm && sortedPokemons.length === 0) {
       setNotFound(true);
     } else {
       setNotFound(false);
     }
-  }, [searchTerm, filteredPokemons]);
+  }, [searchTerm, sortedPokemons]);
 
   if (loading) {
     return <div>Loading Pokémon...</div>;
@@ -71,12 +91,16 @@ const PokemonList = ({ selectedRegion, searchTerm, currentPage, itemsPerPage, on
 
   const indexOfLastPokemon = currentPage * itemsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - itemsPerPage;
-  const currentPokemons = filteredPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
-  const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
+  const currentPokemons = sortedPokemons.slice(indexOfFirstPokemon, indexOfLastPokemon);
+  const totalPages = Math.ceil(sortedPokemons.length / itemsPerPage);
 
   return (
     <div>
-      {notFound && <div className="error-message">This Pokémon is not found in the {selectedRegion.charAt(0).toUpperCase() + selectedRegion.slice(1)} region.</div>}
+      {notFound && (
+        <div className="error-message">
+          This Pokémon is not found in the {selectedRegion.charAt(0).toUpperCase() + selectedRegion.slice(1)} region.
+        </div>
+      )}
 
       <div className="pokemon-grid">
         {currentPokemons.map((pokemon) => (
@@ -90,7 +114,7 @@ const PokemonList = ({ selectedRegion, searchTerm, currentPage, itemsPerPage, on
           <button
             key={index}
             className={`pagination-button ${currentPage === index + 1 ? 'active' : ''}`}
-            onClick={() => onPageChange(index + 1)}  // Call the page change handler
+            onClick={() => onPageChange(index + 1)} // Call the page change handler
           >
             {index + 1}
           </button>

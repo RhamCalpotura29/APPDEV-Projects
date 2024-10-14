@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PokemonList from './PokemonList';
 import Header from './Header';
 import Footer from './Footer';
+import SortDropdown from './SortDropdown';
 import './index.css';
 
 const App = () => {

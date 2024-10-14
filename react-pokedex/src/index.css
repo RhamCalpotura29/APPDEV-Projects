@@ -21,8 +21,8 @@ body {
 /* index.css */
 @font-face {
   font-family: 'PokemonSolid';
-  src: url('/C:\Users\calpotura_r\Downloads\PortableGit-2.46.0-64-bit.7z\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff2') format('woff2'),
-       url('/C:\Users\calpotura_r\Downloads\PortableGit-2.46.0-64-bit.7z\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff') format('woff');
+  src: url('D:\Programming Only\PortableGit\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff2') format('woff2'),
+       url('D:\Programming Only\PortableGit\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff') format('woff');
 }
 
 
@@ -31,7 +31,7 @@ body {
   font-family: 'PokemonSolid', sans-serif;
   font-size: 4rem;
   color: #ffcb05;  /* Pokémon yellow color */
-  text-shadow: 6px 6px 0 #3b4cca, -3px -3px 0 #3b4cca, 4px -3px 0 #3b4cca, -3px 4px 0 #3b4cca, 4px 4px 0 #3b4cca;  /* Blue outline */
+  text-shadow: 5px 5px 0 #3b4cca, -3px -3px 0 #3b4cca, 4px -3px 0 #3b4cca, -3px 4px 0 #3b4cca, 4px 4px 0 #3b4cca;  /* Blue outline */
   margin: 0;
   padding: 20px;
   text-align: center;
