@@ -22,7 +22,7 @@ body {
 @font-face {
   font-family: 'PokemonSolid';
   src: url('D:\Programming Only\PortableGit\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff2') format('woff2'),
-       url('D:\Programming Only\PortableGit\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff') format('woff');
+       url('C:\Users\calpotura_r\Downloads\PortableGit-2.46.0-64-bit.7z\APPDEV-Projects\react-pokedex\src\PokemonSolidNormal.woff') format('woff');
 }
 
 
