@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Receipt from './Receipt';
 
-const Checkout = ({ total, onBack }) => {
+const Checkout = ({ cart, items, total, onBack }) => {
   const [amountPaid, setAmountPaid] = useState('');
   const [isPaid, setIsPaid] = useState(false);
   const [change, setChange] = useState(0);
@@ -35,7 +35,7 @@ const Checkout = ({ total, onBack }) => {
       {isPaid && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <Receipt total={total} amountPaid={parseFloat(amountPaid)} change={change} />
+            <Receipt cart={cart} items={items} total={total} amountPaid={parseFloat(amountPaid)} change={change} />
             <button onClick={() => setIsPaid(false)} className="close-button">Close</button>
           </div>
         </div>

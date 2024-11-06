@@ -57,7 +57,7 @@ const App = () => {
           onCheckout={handleProceedToCheckout} // Trigger checkout modal
           removeItem={removeItem}
           addItem={addItem}
-          isCheckout={isCheckout} // Pass the state of checkout
+ isCheckout={isCheckout} // Pass the state of checkout
         />
       </div>
       {showCheckout && <Checkout total={total} onBack={() => setShowCheckout(false)} />}
